@@ -11,9 +11,9 @@ public:
 	ofxMarsyasNetwork();
 	virtual ~ofxMarsyasNetwork();
 
-  virtual void setup()  {};
-  virtual void update() {};
-  virtual void draw()   {};
+	virtual void setup()  {};
+	virtual void update() {};
+	virtual void draw()   {};
 	
 	void threadedFunction();
 	void run();
@@ -28,8 +28,8 @@ public:
 	unsigned long lastTick;
 
 #ifndef TARGET_WIN32
-  float targetPriority;
-  float priority;
+	float targetPriority;
+	float priority;
 #endif
 };
 
