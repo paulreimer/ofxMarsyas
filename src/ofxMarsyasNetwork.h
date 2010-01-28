@@ -8,7 +8,7 @@
 class ofxMarsyasNetwork : public ofxThread, public Marsyas::Series
 {
 public:
-	ofxMarsyasNetwork();
+	ofxMarsyasNetwork(string name = "net");
 	virtual ~ofxMarsyasNetwork();
 
 	virtual void setup()  {};
