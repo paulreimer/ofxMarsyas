@@ -1,11 +1,12 @@
 #pragma once
 
-#include "ofMain.h"
-#include "ofxThread.h"
+#include "ofThread.h"
 #include "marsyas/Series.h"
 #include "marsyas/MarSystemManager.h"
 
-class ofxMarsyasNetwork : public ofxThread, public Marsyas::Series
+class ofxMarsyasNetwork
+: public ofThread
+, public Marsyas::Series
 {
 public:
 	ofxMarsyasNetwork(string name = "net");
@@ -27,7 +28,7 @@ public:
 	unsigned long thisTick;
 	unsigned long lastTick;
 
-#ifndef TARGET_WIN32
+#ifdef _POSIX_VERSION
 	float targetPriority;
 	float priority;
 #endif
