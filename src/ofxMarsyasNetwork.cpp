@@ -6,7 +6,9 @@ ofxMarsyasNetwork::ofxMarsyasNetwork(string name)
 : Marsyas::Series(name)
 {
 	targetRate = rate = 0;
+#ifdef _POSIX_VERSION
 	targetPriority = priority = 1;
+#endif
 }
 
 ofxMarsyasNetwork::~ofxMarsyasNetwork()
@@ -18,16 +20,19 @@ void ofxMarsyasNetwork::threadedFunction()
 {
 	while( isThreadRunning() )
 	{
+#ifdef _POSIX_VERSION
 		if (priority != targetPriority)
 		{
 			run();
 			priority = targetPriority;
 		}
+#endif
 
 		if (lock())
 		{
 			tick();
 			thisTick = ofGetSystemTime();
+      // update calculated rate
 			rate = ofLerp(rate, 1000.0/(thisTick-lastTick), 0.001);		
 			lastTick = thisTick;
 
@@ -48,7 +53,7 @@ void ofxMarsyasNetwork::run()
 	if (isThreadRunning())
 		stopThread();
 
-#ifndef TARGET_WIN32
+#ifdef _POSIX_VERSION
 	pthread_attr_t tattr;
 	int oldprio, policy;
 	sched_param param;
@@ -65,7 +70,7 @@ void ofxMarsyasNetwork::run()
 
 	startThread(true, false); // blocking, non-verbose
 
-#ifndef TARGET_WIN32
+#ifdef _POSIX_VERSION
 	// restore the old priority to prevent scaling from escalating
 	param.sched_priority = oldprio;
 	// set the old scheduling param
