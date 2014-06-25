@@ -1,5 +1,4 @@
 #include "ofxMarsyasNetwork.h"
-#include "ofMath.h"
 
 Marsyas::MarSystemManager ofxMarsyasNetwork::mng;
 

@@ -1,6 +1,10 @@
 #pragma once
 
 #include "ofThread.h"
+#include "ofMath.h"
+#include "ofUtils.h"
+#include "ofAppRunner.h"
+
 #include "marsyas/Series.h"
 #include "marsyas/MarSystemManager.h"
 
